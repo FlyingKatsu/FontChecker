@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FontTest</title>
+  <script src="js/concrete.min.js"></script>
+  <script defer src="js/font.js"></script>
+
+  <script>
+    let FontChecker;
+    // Set up our FontChecker module thing
+    document.addEventListener('DOMContentLoaded', function() {
+      FontChecker = CreateFontChecker({
+        width: 1024,
+        height: 1024,
+        //container: document.getElementById('hiddencanvas'), // do this when document has loaded
+        text: 'Test\nText', // for best results, use 4 chars per line
+        fontsize: 72,
+        miter: 10,
+        drawPos: { // for best results, use <0,0>
+          x: 0,
+          y: 0
+        }
+      }, {});
+
+      // Sample Usage
+      let testTimes = '[serif] FontChecker.isDefaultFont(\'Times New Roman\'): ' + FontChecker.isDefaultFont('Times New Roman');
+      let testImpact = '[true, but false on iOS] FontChecker.hasCustomFont(\'Impact\'): ' + FontChecker.hasCustomFont('Impact');
+      let testiOSA = '[false? but true on iOS] FontChecker.hasCustomFont(\'Futura-CondensedExtraBold\'): ' + FontChecker.hasCustomFont('Futura-CondensedExtraBold');
+      let testiOSB = '[false? but true on iOS] FontChecker.hasCustomFont(\'HelveticaNeue-CondensedBlack\'): ' + FontChecker.hasCustomFont('HelveticaNeue-CondensedBlack');
+      let testImg = 'document.getElementById(\'font-preview\').src = FontChecker.getFontData(\'Impact\')';
+      document.getElementById('font-results').innerText += testTimes + '\n' + testImpact + '\n' + testiOSA + '\n' + testiOSB + '\n' + testImg;
+      console.log(testTimes);
+      console.log(testImpact);
+      console.log(testiOSA);
+      console.log(testiOSB);
+      console.log(testImg);
+      document.getElementById('font-preview').src = FontChecker.getFontData('Impact');
+
+    });
+  </script>
+
+  <style>
+    body {
+      text-align: center;
+      width: 80%;
+      margin: 0 auto;
+    }
+    
+    #font-test {
+      font-family: Impact, Charcoal, Haettenschweiler, 'Futura-CondensedExtraBold', 'HelveticaNeue-CondensedBlack', 'Arial Narrow Bold', sans-serif;
+    }
+    
+    #canvaswrapper {
+      /* Hide the canvas to be discrete. Toggle in browser to check that FontChecker works */
+      display: none;
+    }
+    
+    span {
+      font-family: monospace;
+      background: #eeeeee;
+      font-weight: bold;
+    }
+    
+    img,
+    canvas {
+      border: 1px solid #aaaaaa;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 id="font-test">Font Checker Example Page</h1>
+  <p>The above heading should use the Impact font, except on iOS devices.</p>
+  <h2>Instructions</h2>
+  <p>To use FontChecker, open the browser console and type <span>FontChecker.isDefaultFont('font')</span> or <span>FontChecker.hasCustomFont('font')</span>.</p>
+  <p>Use <span>document.getElementById('font-preview').src = FontChecker.getFontData('font')</span>, or toggle the <span>#canvaswrapper { display: none; }</span> in the style inspector to see the font on the canvas.</p>
+  <h2>Example Test Results</h2>
+  <p id="font-results"></p>
+  <div id="canvaswrapper">
+    <h3>Canvas</h3>
+    <div id="hiddencanvas"></div>
+  </div>
+  <h3>Image Source = FontChecker.getFontData('Impact')</h3>
+  <img id="font-preview">
+</body>
+
+</html>
