@@ -5,7 +5,7 @@ A small project that compares a given font to the default `serif`, `sans-serif`,
 
 ## Instructions
 
-1. Go to the [sample page](https://github.com/FlyingKatsu/FontChecker)
+1. Go to the [sample page](https://flyingkatsu.github.io/FontChecker/)
 2. Open the browser console and type `FontChecker.isDefaultFont('font')` or `FontChecker.hasCustomFont('font')`
 3. In the style inspector, toggle `#canvaswrapper { display: none; }` to see the font on the canvas
 4. In the browser console, type `document.getElementById('font-preview').src = FontChecker.getFontData('font')` to change the image preview using the getFontData function
